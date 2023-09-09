@@ -1,12 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { PrismaService } from './database/prisma.service';
 
-@Controller()
+@Controller('api')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  constructor(private prisma: PrismaService) {}
+  
+  @Get("sales-by-interval")
+  getSalesByInterval() {
+    return {
+      message: "Hello"
+    };
   }
 }
