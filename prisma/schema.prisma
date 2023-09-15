@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
@@ -36,7 +36,7 @@ model Venda {
 }
 
 model ItemVenda {
-  id_itemVenda Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   id_venda Int
   id_produto Int
   quantidadeVendida Int
