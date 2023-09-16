@@ -27,12 +27,22 @@ export class FakerInsertController {
   }
 
   @Post("insert-sales")
-  insertSales(@Body() body: any) {
-
+  async insertSales(@Body() body: any) {
+    return await this.prisma.venda.createMany(
+      {
+        "data": body["vendas"],
+        skipDuplicates: true,
+      }
+    );
   }
 
   @Post("insert-items-sale")
-  insertItemsSale(@Body() body: any) {
-
+  async insertItemsSale(@Body() body: any) {
+    return await this.prisma.itemVenda.createMany(
+      {
+        "data": body["itens-vendas"],
+        skipDuplicates: true,
+      }
+    );
   }
 }
