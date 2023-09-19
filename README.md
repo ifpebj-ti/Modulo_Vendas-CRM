@@ -1,73 +1,44 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Badges
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![GitHub pull requests](https://img.shields.io/github/issues-pr/ifpebj-ti/Modulo_Vendas-CRM) ![GitHub](https://img.shields.io/github/license/ifpebj-ti/Modulo_Vendas-CRM) ![example workflow](https://github.com/ifpebj-ti/Modulo_Vendas-CRM/actions/workflows/main.yml/badge.svg)  [![Badge cover](https://ifpebj-ti.github.io/Modulo_Marketing-CRM/badges/coverage.svg)](https://github.com/we-cli/jayin/actions)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# GitHub Flow
 
-## Description
+O GitHub Flow é um modelo de fluxo de trabalho simples e eficaz para colaboração em projetos usando o GitHub. Ele se concentra em manter o processo de desenvolvimento fluido, permitindo que equipes trabalhem de maneira colaborativa, iterativa e segura. Este documento explica os passos básicos do GitHub Flow.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Passos do GitHub Flow
 
-## Installation
+1. **Clone o Repositório:**
+   * Clone o repositório (original ou seu fork) para a sua máquina local usando o comando `git clone ou git pull`.
+2. **Crie um Branch:**
+   * Sempre crie um novo branch para cada nova funcionalidade ou correção.
+   * Use nomes descritivos para os branches, como `feature/nome-da-funcionalidade` ou `bugfix/nome-do-conserto`.
+3. **Faça as Alterações:**
+   * Faça as alterações necessárias no código. Adicione, modifique ou exclua arquivos conforme necessário.
+4. **Commit e Push:**
+   * Realize commits frequentes e atômicos, com mensagens claras e descritivas.
+   * Use `git commit -m "Mensagem descritiva"` para fazer commits.
+5. **Abra um Pull Request (PR):**
+   * Envie o seu branch para o repositório remoto usando `git push`.
+   * No GitHub, clique em "Compare & pull request" para abrir um PR.
+6. **Revisão e Discussão:**
+   * Colaboradores revisarão o seu código e farão comentários no PR.
+   * Responda aos comentários e ajuste o código conforme necessário.
+7. **Merge do Pull Request:**
+   * Após revisões, e quando o código estiver pronto, faça o merge do PR.
+   * Certifique-se de que o branch esteja atualizado antes do merge.
+8. **Delete o Branch:**
+   * Após o merge, exclua o branch do PR, pois ele não será mais necessário.
+9. **Atualize e Sincronize:**
+   * Regularmente, atualize o seu fork e o branch principal para incorporar as últimas mudanças.
 
-```bash
-$ npm install
-```
+## Benefícios do GitHub Flow
 
-## Running the app
+* **Simplicidade:** O GitHub Flow é fácil de entender e usar, o que o torna adequado para equipes de diferentes níveis de experiência.
+* **Iteração Rápida:** O fluxo encoraja ciclos curtos de desenvolvimento e feedback, possibilitando melhorias contínuas.
+* **Colaboração Eficiente:** Permite que múltiplos desenvolvedores trabalhem simultaneamente em funcionalidades diferentes.
+* **Histórico Limpo:** Cada feature é desenvolvida em um branch separado, mantendo o histórico principal mais limpo e organizado.
 
-```bash
-# development
-$ npm run start
+## Representação vizual do Github Flow
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+![R](https://cdn.discordapp.com/attachments/1134506213388865598/1145769943426682940/16932432354423735495649931597106.png)
