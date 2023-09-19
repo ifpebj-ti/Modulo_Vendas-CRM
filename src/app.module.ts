@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { PrismaService } from './database/prisma.service';
-import { FakerInsertController } from './fake.insert.controller';
 import { FakeController } from './fake/fake.controller';
+import { SalesModule } from './sales/sales.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, FakerInsertController, FakeController],
+  imports: [SalesModule],
+  controllers: [AppController, FakeController, FakeController],
   providers: [PrismaService],
 })
 
