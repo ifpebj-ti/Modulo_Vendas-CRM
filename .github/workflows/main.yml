@@ -11,24 +11,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  Lint:
-    runs-on: ubuntu-latest
+  lint:
     name: Run lint
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '18'
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Install dependencies
-        run: |
-          npm install
-      - name: Lint
-        run: |
-          npm run lint
+        run: npm install
+      - name: Run lint
+        run: npm run lint
 
   Test:
     runs-on: ubuntu-latest
     name: Run tests
-    needs: Lint
+    needs: lint
     steps:
       - uses: actions/setup-node@v2
         with:
