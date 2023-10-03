@@ -3,42 +3,122 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
-model Cliente {
-  id_cliente Int @id
-  nome String
-  sobrenome String
-  email String
-  telefone String
-  endereco String
-  dataNascimento DateTime
+model venda {
+  id_venda           Int          @id @default(autoincrement())
+  nome_vendedor      String?      @db.VarChar(255)
+  data               DateTime?    @db.Date
+  hora               DateTime?    @db.Time(6)
+  forma_de_pagamento String?      @db.VarChar(255)
+  total_venda        Decimal?     @db.Decimal
+  id_cliente         Int?
+  id_filial          Int?
+  item_venda         item_venda[]
+  cliente            cliente?     @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction)
+  filial             filial?      @relation(fields: [id_filial], references: [id_filial], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model Produto {
-  id_produto Int @id
-  nome_produto String
-  descricao String
-  categoria String
-  precoVenda Float
-  quantidadeEstoque Int
-  dataValidade DateTime
-  fornecedor String
+model categoria_produto {
+  id_categoria Int       @id @default(autoincrement())
+  nome         String?   @db.VarChar(255)
+  produto      produto[]
 }
 
-model Venda {
-  id_venda Int @id @default(autoincrement())
-  dataHoraVenda DateTime
-  clienteId Int
-  totalVenda Float
+model cliente {
+  cpf             String?    @unique(map: "cpf") @db.VarChar
+  id_cliente      Int        @id @default(autoincrement())
+  nome_completo   String?    @db.VarChar(255)
+  data_nascimento DateTime?  @db.Date
+  telefone        String?    @db.VarChar(15)
+  email           String?    @db.VarChar(255)
+  id_endereco     Int?
+  data_registro   DateTime?  @db.Date
+  enderecos       enderecos? @relation(fields: [id_endereco], references: [id_endereco], onDelete: NoAction, onUpdate: NoAction, map: "cliente_fk")
+  venda           venda[]
 }
 
-model ItemVenda {
-  id_itemVenda Int @id @default(autoincrement())
-  id_venda Int
-  id_produto Int
-  quantidadeVendida Int
-  precoUnitario Float
+model enderecos {
+  id_endereco Int       @id @default(autoincrement())
+  pais        String?   @db.VarChar(40)
+  estado      String?   @db.VarChar(40)
+  cidade      String?   @db.VarChar(40)
+  bairro      String?   @db.VarChar(40)
+  rua         String?   @db.VarChar(100)
+  numero      String?   @db.VarChar(20)
+  cep         String?   @db.VarChar(10)
+  cliente     cliente[]
+  filial      filial[]
+}
+
+model filial {
+  id_filial     Int        @id @default(autoincrement())
+  nome          String?    @db.VarChar(255)
+  id_endereco   Int?
+  email         String?    @db.VarChar
+  celular       String?    @db.VarChar
+  telefone_fixo String?    @db.VarChar
+  cnpj          String?    @db.VarChar
+  enderecos     enderecos? @relation(fields: [id_endereco], references: [id_endereco], onDelete: NoAction, onUpdate: NoAction, map: "fk_endereco_filial")
+  usuario       usuario[]
+  venda         venda[]
+}
+
+model item_venda {
+  id_item_venda      Int      @id @default(autoincrement())
+  preco_unitario     Decimal? @db.Decimal
+  quantidade_vendida Int?
+  id_produto         Int?
+  id_venda           Int?
+  nome_produto       String?  @db.VarChar(255)
+  produto            produto? @relation(fields: [id_produto], references: [id_produto], onDelete: NoAction, onUpdate: NoAction)
+  venda              venda?   @relation(fields: [id_venda], references: [id_venda], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model produto {
+  id_produto            Int                   @id @default(autoincrement())
+  nome                  String?               @db.VarChar(255)
+  data_validade         DateTime?             @db.Date
+  fornecedor            String?               @db.VarChar(255)
+  descricao             String?
+  quantidade_estoque    Int?
+  preco_venda           Decimal?              @db.Decimal
+  id_categoria          Int?
+  categoria_regulatoria String?               @db.VarChar
+  id_subcategoria       Int?
+  item_venda            item_venda[]
+  categoria_produto     categoria_produto?    @relation(fields: [id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_categoria_produto")
+  subcategoria_produto  subcategoria_produto? @relation(fields: [id_subcategoria], references: [id_subcategoria], onDelete: NoAction, onUpdate: NoAction, map: "produto_fk")
+  produto_em_promocao   produto_em_promocao[]
+}
+
+model produto_em_promocao {
+  data_inicio            DateTime? @db.Date
+  data_fim               DateTime? @db.Date
+  desconto               Decimal?  @db.Decimal
+  id_produto             Int
+  id_produto_em_promocao Int       @id(map: "produto_em_promocao_pk") @default(autoincrement())
+  produto                produto   @relation(fields: [id_produto], references: [id_produto], onDelete: NoAction, onUpdate: NoAction, map: "produto_em_promocao_fk")
+}
+
+model subcategoria_produto {
+  id_subcategoria   Int       @id @default(autoincrement())
+  nome_subcategoria String?   @db.VarChar
+  produto           produto[]
+}
+
+model usuario {
+  matricula       Int
+  id_usuario      Int       @id(map: "usuario_pk") @default(autoincrement())
+  nome            String?   @db.VarChar(255)
+  nivel_de_acesso String?   @db.VarChar(50)
+  email           String?   @db.VarChar(255)
+  senha           String?   @db.VarChar(255)
+  id_filial       Int?
+  celular         String?   @db.VarChar
+  data_nascimento DateTime? @db.Date
+  data_admiss_o   DateTime? @map("data_admissão") @db.Date
+  filial          filial?   @relation(fields: [id_filial], references: [id_filial], onDelete: NoAction, onUpdate: NoAction, map: "fk_filial_usuario")
 }
