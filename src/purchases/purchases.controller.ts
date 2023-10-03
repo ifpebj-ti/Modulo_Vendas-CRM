@@ -8,7 +8,7 @@ export class PurchasesController {
   @Get(':id/frequencia-valor')
   async calcularFrequencia(@Param('id') id: string) {
     const idCliente = parseInt(id, 10);
-    const data = await this.purchasesService.calcularFrequencia(idCliente);
+    const data = await this.purchasesService.calcularFrequenciaEValorGastoPorCliente();
     return data;
   }
 }
