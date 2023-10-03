@@ -12,7 +12,7 @@ export class SalesService {
     ) {
         const sales = await this.prisma.venda.findMany({
             where: {
-                dataHoraVenda: {
+                data: {
                     gte: startDate,
                     lte: endDate,
                 }
