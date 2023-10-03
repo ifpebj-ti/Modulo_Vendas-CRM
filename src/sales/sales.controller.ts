@@ -18,7 +18,7 @@ export class SalesController {
         const sales = await this.salesService.getSalesByIntervalAndBranch(
             new Date(startDate),
             new Date(endDate),
-            0
+            branchId
         );
 
         return sales;

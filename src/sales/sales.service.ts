@@ -15,7 +15,8 @@ export class SalesService {
                 data: {
                     gte: startDate,
                     lte: endDate,
-                }
+                },
+                id_filial: parseInt(branchId.toString())
             },
         });
         return sales;
