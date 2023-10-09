@@ -6,6 +6,6 @@ import { PrismaService } from 'src/database/prisma.service';
 @Module({
   imports: [],
   providers: [SalesService, PrismaService],
-  controllers: [SalesController]
+  controllers: [SalesController],
 })
 export class SalesModule {}
