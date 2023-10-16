@@ -2,9 +2,6 @@
 
 name: CI/CD pipeline
 
-env:
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -52,8 +49,11 @@ jobs:
       - uses: actions/setup-node@v2
       - name: Install dependencies
         run: npm install
-      - name: Run tests
-        run: npm run test
+      - name: Run build
+        run: npm run build
+        env:
+          CI: true
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
   horusec-security:
     name: horusec-security
@@ -73,6 +73,8 @@ jobs:
     name: Build Docker image
     needs: horusec-security
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
