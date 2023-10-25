@@ -4,9 +4,10 @@ import { PrismaService } from './database/prisma.service';
 import { FakeController } from './fake/fake.controller';
 import { SalesModule } from './sales/sales.module';
 import { PurchasesModule } from './purchases/purchases.module';
+import { TicketModule } from './ticket/ticket.module';
 
 @Module({
-  imports: [SalesModule, PurchasesModule],
+  imports: [SalesModule, PurchasesModule, TicketModule],
   controllers: [AppController, FakeController, FakeController],
   providers: [PrismaService],
 })
