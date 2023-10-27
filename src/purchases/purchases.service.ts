@@ -4,27 +4,26 @@ import { Decimal } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class PurchasesService {
-    constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-    async calcularFrequenciaEValorGastoPorCliente() {
-      const clientes = await this.prismaService.cliente.findMany();
-      const dados = await Promise.all(
-        clientes.map(async (cliente) => {
-          const frequencia = await this.calcularFrequencia(cliente.id_cliente);
-          const valorGasto = await this.calcularValorGasto(cliente.id_cliente);
-          return{
-            id_cliente: cliente.id_cliente,
-            frequencia,
-            valor_gasto: valorGasto,
-          };
-        })
-      );
+  async calcularFrequenciaEValorGastoPorCliente() {
+    const clientes = await this.prismaService.cliente.findMany();
+    const dados = await Promise.all(
+      clientes.map(async (cliente) => {
+        const frequencia = await this.calcularFrequencia(cliente.id_cliente);
+        const valorGasto = await this.calcularValorGasto(cliente.id_cliente);
+        return {
+          id_cliente: cliente.id_cliente,
+          frequencia,
+          valor_gasto: valorGasto,
+        };
+      }),
+    );
 
-      return dados;
-    
+    return dados;
   }
 
-  private async calcularFrequencia(idCliente: number){
+  private async calcularFrequencia(idCliente: number) {
     const numeroDeVendas = await this.prismaService.venda.count({
       where: {
         id_cliente: idCliente,
@@ -32,7 +31,7 @@ export class PurchasesService {
     });
     return numeroDeVendas;
   }
- 
+
   private async calcularValorGasto(idCliente: number) {
     const vendasDoCliente = await this.prismaService.venda.findMany({
       where: {
@@ -41,7 +40,7 @@ export class PurchasesService {
     });
     const totalGasto = vendasDoCliente.reduce(
       (acumulador, venda) => acumulador.plus(new Decimal(venda.total_venda)),
-      new Decimal(0)
+      new Decimal(0),
     );
     return totalGasto.toString();
   }
