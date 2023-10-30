@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TicketController } from 'src/ticket/ticket.controller'; 
+import { TicketController } from 'src/ticket/ticket.controller';
 import { TicketService } from 'src/ticket/ticket.service';
 
 describe('TicketController', () => {
@@ -22,5 +22,4 @@ describe('TicketController', () => {
     const result = await controller.calcularTicketMedioPorMes();
     expect(result).toBeDefined();
   });
-  
 });

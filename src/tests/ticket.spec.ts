@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TicketService } from 'src/ticket/ticket.service'; 
+import { TicketService } from 'src/ticket/ticket.service';
 import { PrismaService } from '../database/prisma.service';
 
 describe('TicketService', () => {
   let ticketService: TicketService;
-  let prismaService: PrismaService;
 
   // Antes de cada teste, inicialize o módulo de teste
   beforeEach(async () => {
@@ -13,11 +12,9 @@ describe('TicketService', () => {
     }).compile();
 
     ticketService = module.get<TicketService>(TicketService);
-    prismaService = module.get<PrismaService>(PrismaService);
   });
 
   it('deve calcular o ticket médio por mês corretamente', async () => {
-    
     const prismaServiceMock = {
       $queryRaw: jest.fn().mockResolvedValue([
         { id_cliente: 1, ticketMedio: 'R$ 500.00' },
@@ -34,6 +31,8 @@ describe('TicketService', () => {
       { id_cliente: 2, ticketMedio: 'R$ 800.00' },
     ]);
 
-    expect(prismaServiceMock.$queryRaw).toHaveBeenCalledWith(expect.any(String));
+    expect(prismaServiceMock.$queryRaw).toHaveBeenCalledWith(
+      expect.any(String),
+    );
   });
 });

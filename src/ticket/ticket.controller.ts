@@ -6,10 +6,8 @@ export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
 
   @Get()
-  async calcularTicketMedioPorMes(){
+  async calcularTicketMedioPorMes() {
     const resultado = await this.ticketService.calcularTicketMedioPorMes();
     return resultado;
   }
 }
-
-
