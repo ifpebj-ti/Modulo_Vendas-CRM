@@ -19,7 +19,7 @@ describe('TicketController', () => {
   });
 
   it('calcular o ticket medio', async () => {
-    const result = await controller.calcularTicketMedioPorMes();
+    const result = await controller.calcularTicketMedioMensalPorCliente();
     expect(result).toBeDefined();
   });
 });
