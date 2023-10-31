@@ -5,8 +5,8 @@ import { PrismaService } from 'src/database/prisma.service';
 export class TicketService {
   constructor(private prisma: PrismaService) {}
 
-  async calcularTicketMedioMensalPorCliente() {
-    const resultado = await this.prisma.$queryRaw`
+  async calcularTicketMedioMensalPorCliente(): Promise<Array<object>> {
+    const resultado: Array<object> = await this.prisma.$queryRaw`
       SELECT
         c.id_cliente,
         TO_CHAR(AVG(v.total_venda), 'L999G999D99') as ticketMedio
