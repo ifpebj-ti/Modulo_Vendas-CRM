@@ -4,7 +4,6 @@ import { PrismaService } from '../../src/database/prisma.service';
 
 describe('TicketService', () => {
   let ticketService: TicketService;
-  let prismaService: PrismaService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -12,7 +11,6 @@ describe('TicketService', () => {
     }).compile();
 
     ticketService = module.get<TicketService>(TicketService);
-    prismaService = module.get<PrismaService>(PrismaService);
   });
 
   it('deve calcular o ticket médio mensal por cliente', async () => {
