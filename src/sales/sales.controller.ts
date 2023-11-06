@@ -6,7 +6,7 @@ import { ApiQuery } from '@nestjs/swagger';
 export class SalesController {
   constructor(private readonly salesService: SalesService) {}
 
-  @Get('byIntervalAndBranch')
+  @Get('sales')
   @ApiQuery({ name: 'startDate', required: true, type: Date })
   @ApiQuery({ name: 'endDate', required: true, type: Date })
   @ApiQuery({ name: 'branchId', required: false, type: Number })
@@ -22,5 +22,41 @@ export class SalesController {
     );
 
     return sales;
+  }
+
+  @Get('totalBilling')
+  @ApiQuery({ name: 'startDate', required: true, type: Date })
+  @ApiQuery({ name: 'endDate', required: true, type: Date })
+  @ApiQuery({ name: 'branchId', required: false, type: Number })
+  async getTotalBillingByIntervalAndBranch(
+    @Query('startDate') startDate: Date,
+    @Query('endDate') endDate: Date,
+    @Query('branchId') branchId: number,
+  ) {
+    const result = await this.salesService.getTotalBillingByIntervalAndBranch(
+      new Date(startDate),
+      new Date(endDate),
+      branchId,
+    )
+
+    return result;
+  }
+
+  @Get('totalSales')
+  @ApiQuery({ name: 'startDate', required: true, type: Date })
+  @ApiQuery({ name: 'endDate', required: true, type: Date })
+  @ApiQuery({ name: 'branchId', required: false, type: Number })
+  async getTotalSalesByIntervalAndBranch(
+    @Query('startDate') startDate: Date,
+    @Query('endDate') endDate: Date,
+    @Query('branchId') branchId: number,
+  ) {
+    const result = await this.salesService.getTotalSalesByIntervalAndBranch(
+      new Date(startDate),
+      new Date(endDate),
+      branchId,
+    )
+
+    return result;
   }
 }
