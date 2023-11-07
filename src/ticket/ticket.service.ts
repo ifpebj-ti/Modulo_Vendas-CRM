@@ -9,14 +9,25 @@ export class TicketService {
     const resultado: Array<object> = await this.prisma.$queryRaw`
       SELECT
         c.id_cliente,
-        TO_CHAR(AVG(v.total_venda), 'L999G999D99') as ticketMedio
+        AVG(v.total_venda) as ticketMedio
       FROM cliente c
       LEFT JOIN venda v ON c.id_cliente = v.id_cliente
-      WHERE DATE_TRUNC('month', v.data) = DATE_TRUNC('month', NOW())
+
       GROUP BY c.id_cliente
     `;
-
     return resultado;
+  } 
+
+  async vendasPorCliente(id_cliente:number){
+    const resultado:  Array<object> = await this.prisma.$queryRaw`
+      SELECT
+        c.id_cliente,
+        v.total_venda
+      FROM cliente c
+      LEFT JOIN venda v ON c.id_cliente = v.id_cliente
+      WHERE c.id_cliente = ${parseInt(id_cliente.toString())}
+    `;
+    return resultado; 
   }
-}
+} 
 

@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { TicketService } from './ticket.service';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('ticket')
 export class TicketController {
@@ -10,4 +11,13 @@ export class TicketController {
     const resultado = await this.ticketService.calcularTicketMedioMensalPorCliente();
     return resultado;
   }
+
+  @Get("vendasPorCliente")
+  @ApiQuery({ name: 'idCliente', required: true, type: Number})
+  async vendasPorCliente(@Query('idCliente') idCliente: number) {
+    const resultado = await this.ticketService.vendasPorCliente(idCliente);
+    return resultado;
+  }
+
+
 }

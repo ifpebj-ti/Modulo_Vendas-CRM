@@ -1,11 +1,13 @@
 generator client {
   provider = "prisma-client-js"
+
 }
 
 datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
 }
+
 
 model venda {
   id_venda           Int          @id @default(autoincrement())
