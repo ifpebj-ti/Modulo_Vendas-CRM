@@ -30,13 +30,12 @@ export class SalesService {
     const intBranch = parseInt(branchId.toString())
 
     const totalBilling = await this.prisma.$queryRaw`
-      SELECT
-        SUM(item_venda.preco_unitario) as totalBilling
+      SELECT SUM(total_venda) as totalBilling
       FROM venda
-      INNER JOIN item_venda ON venda.id_venda = item_venda.id_venda
+      WHERE data BETWEEN ${startDate} AND ${endDate}
+      AND id_filial = ${intBranch}
     `;
 
-    console.log(startDate);
     return totalBilling;
   }
 
