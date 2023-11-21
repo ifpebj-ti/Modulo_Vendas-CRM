@@ -86,6 +86,8 @@ jobs:
       with:
         # Disabling shallow clones is recommended for improving the relevancy of reporting
         fetch-depth: 0
+    - name: install jest
+      run: npm i jest
     - name: Test and coverage
       run: npm run test:cov
     - name: SonarQube Scan
