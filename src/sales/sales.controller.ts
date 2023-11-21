@@ -9,7 +9,7 @@ export class SalesController {
   @Get('sales')
   @ApiQuery({ name: 'startDate', required: true, type: Date })
   @ApiQuery({ name: 'endDate', required: true, type: Date })
-  @ApiQuery({ name: 'branchId', required: false, type: Number })
+  @ApiQuery({ name: 'branchId', required: true, type: Number })
   async getSalesByIntervalAndBranch(
     @Query('startDate') startDate: Date,
     @Query('endDate') endDate: Date,
@@ -31,7 +31,7 @@ export class SalesController {
   @Get('totalBilling')
   @ApiQuery({ name: 'startDate', required: true, type: Date })
   @ApiQuery({ name: 'endDate', required: true, type: Date })
-  @ApiQuery({ name: 'branchId', required: false, type: Number })
+  @ApiQuery({ name: 'branchId', required: true, type: Number })
   async getTotalBillingByIntervalAndBranch(
     @Query('startDate') startDate: Date,
     @Query('endDate') endDate: Date,
@@ -53,7 +53,7 @@ export class SalesController {
   @Get('totalSales')
   @ApiQuery({ name: 'startDate', required: true, type: Date })
   @ApiQuery({ name: 'endDate', required: true, type: Date })
-  @ApiQuery({ name: 'branchId', required: false, type: Number })
+  @ApiQuery({ name: 'branchId', required: true, type: Number })
   async getTotalSalesByIntervalAndBranch(
     @Query('startDate') startDate: Date,
     @Query('endDate') endDate: Date,

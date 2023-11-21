@@ -1,11 +1,15 @@
 FROM arm64v8/node:18-alpine
 
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
+USER nonroot
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY . .
+COPY . /usr/src/app
 
-RUN npm install
+RUN npm install --ignore-scripts
 RUN npx prisma generate
 RUN npm run build 
 
