@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Query } from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { ApiQuery } from '@nestjs/swagger';
 
@@ -15,13 +15,17 @@ export class SalesController {
     @Query('endDate') endDate: Date,
     @Query('branchId') branchId: number,
   ) {
-    const sales = await this.salesService.getSalesByIntervalAndBranch(
-      new Date(startDate),
-      new Date(endDate),
-      branchId,
-    );
+    try {
+      const sales = await this.salesService.getSalesByIntervalAndBranch(
+        new Date(startDate),
+        new Date(endDate),
+        branchId,
+      );
 
-    return sales;
+      return sales;
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Get('totalBilling')
@@ -33,13 +37,17 @@ export class SalesController {
     @Query('endDate') endDate: Date,
     @Query('branchId') branchId: number,
   ) {
-    const result = await this.salesService.getTotalBillingByIntervalAndBranch(
-      new Date(startDate),
-      new Date(endDate),
-      branchId,
-    )
+    try {
+      const result = await this.salesService.getTotalBillingByIntervalAndBranch(
+        new Date(startDate),
+        new Date(endDate),
+        branchId,
+      )
 
-    return result;
+      return { totalBilling: result };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Get('totalSales')
@@ -51,12 +59,16 @@ export class SalesController {
     @Query('endDate') endDate: Date,
     @Query('branchId') branchId: number,
   ) {
-    const result = await this.salesService.getTotalSalesByIntervalAndBranch(
-      new Date(startDate),
-      new Date(endDate),
-      branchId,
-    )
-
-    return result;
+    try {
+      const result = await this.salesService.getTotalSalesByIntervalAndBranch(
+        new Date(startDate),
+        new Date(endDate),
+        branchId,
+      )
+      
+      return { totalSales: result };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
