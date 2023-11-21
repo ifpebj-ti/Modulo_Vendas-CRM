@@ -87,7 +87,7 @@ jobs:
         # Disabling shallow clones is recommended for improving the relevancy of reporting
         fetch-depth: 0
     - name: Test and coverage
-      run: yarn jest --coverage
+      run: npm run test:cov
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
