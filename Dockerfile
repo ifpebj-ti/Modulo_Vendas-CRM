@@ -1,27 +1,27 @@
-# Use a specific version of Node.js
+# Use uma versão específica do Node.js
 FROM node:18-alpine
 
-# Create and set the working directory
+# Crie e defina o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copy only necessary files
+# Copie apenas os arquivos necessários
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install dependencies
+# Instale as dependências
 RUN npm install --ignore-scripts
 
-# Generate Prisma client
+# Gere o cliente Prisma
 RUN npx prisma generate
 
-# Copy the rest of the application code
-COPY . .
+# Copie o código principal (assumindo que o código está dentro da pasta 'src')
+COPY src ./src
 
-# Build the application
+# Construa a aplicação
 RUN npm run build
 
-# Expose the port your app runs on
+# Exponha a porta em que a aplicação é executada
 EXPOSE 3000
 
-# Define the command to run your app
+# Defina o comando para executar a aplicação
 CMD ["npm", "run", "start:prod"]
