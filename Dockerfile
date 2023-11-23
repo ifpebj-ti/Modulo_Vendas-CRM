@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-RUN npm install --ignore-scripts
+RUN npm install
 RUN npx prisma generate
 RUN npm run build
 
