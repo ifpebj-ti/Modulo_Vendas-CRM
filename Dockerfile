@@ -15,11 +15,16 @@ USER nodejs
 COPY package*.json ./
 COPY prisma ./prisma/
 
+USER root
+
 # Instale as dependências
 RUN npm install --ignore-scripts
 
 # Gere o cliente Prisma
 RUN npx prisma generate
+
+# Mude para o usuário não privilegiado
+USER nodejs
 
 # Copie o código principal (assumindo que o código está dentro da pasta 'src')
 COPY src ./src
