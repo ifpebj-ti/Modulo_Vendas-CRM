@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../database/prisma.service';
 
 @Injectable()
 export class TicketService {
@@ -16,7 +16,7 @@ export class TicketService {
       GROUP BY c.id_cliente
     `;
     return resultado;
-  } 
+  }
 
   async vendasPorCliente(id_cliente:number){
     const resultado:  Array<object> = await this.prisma.$queryRaw`

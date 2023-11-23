@@ -44,7 +44,7 @@ export class SalesController {
         branchId,
       )
 
-      return { totalBilling: result };
+      return result;
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -68,6 +68,7 @@ export class SalesController {
       
       return { totalSales: result };
     } catch (error) {
+      console.log(error);
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
