@@ -12,6 +12,7 @@ RUN addgroup -g 1001 -S nodejs \
 USER nodejs
 
 # Copie apenas os arquivos necessários
+COPY tsconfig.json ./
 COPY package*.json ./
 COPY prisma ./prisma/
 
