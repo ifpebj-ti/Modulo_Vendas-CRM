@@ -4,6 +4,13 @@ FROM node:18-alpine
 # Crie e defina o diretório de trabalho
 WORKDIR /usr/src/app
 
+# Adicione um usuário não privilegiado
+RUN addgroup -g 1001 -S nodejs \
+    && adduser -u 1001 -S nodejs -G nodejs
+
+# Mude para o usuário não privilegiado
+USER nodejs
+
 # Copie apenas os arquivos necessários
 COPY package*.json ./
 COPY prisma ./prisma/
