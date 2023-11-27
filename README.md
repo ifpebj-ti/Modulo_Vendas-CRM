@@ -1,6 +1,6 @@
 # Badges
 
-![GitHub pull requests](https://img.shields.io/github/issues-pr/ifpebj-ti/Modulo_Vendas-CRM) ![GitHub](https://img.shields.io/github/license/ifpebj-ti/Modulo_Vendas-CRM) ![example workflow](https://github.com/ifpebj-ti/Modulo_Vendas-CRM/actions/workflows/main.yml/badge.svg)  [![Badge cover](https://ifpebj-ti.github.io/Modulo_Marketing-CRM/badges/coverage.svg)](https://github.com/we-cli/jayin/actions)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/ifpebj-ti/Modulo_Vendas-CRM) ![GitHub](https://img.shields.io/github/license/ifpebj-ti/Modulo_Vendas-CRM) ![example workflow](https://github.com/ifpebj-ti/Modulo_Vendas-CRM/actions/workflows/main.yml/badge.svg)
 
 # GitHub Flow
 
