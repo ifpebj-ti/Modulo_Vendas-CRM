@@ -1,13 +1,11 @@
 generator client {
   provider = "prisma-client-js"
-
 }
 
 datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
 }
-
 
 model venda {
   id_venda           Int          @id @default(autoincrement())
@@ -20,7 +18,7 @@ model venda {
   id_filial          Int?
   item_venda         item_venda[]
   cliente            cliente?     @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction)
-  filial             filial?      @relation(fields: [id_filial], references: [id_filial], onDelete: NoAction, onUpdate: NoAction)
+  filial             Filial?      @relation(fields: [id_filial], references: [id_filial], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model categoria_produto {
@@ -38,6 +36,7 @@ model cliente {
   email           String?    @db.VarChar(255)
   id_endereco     Int?
   data_registro   DateTime?  @db.Date
+  sexo            String?    @db.Char(1)
   enderecos       enderecos? @relation(fields: [id_endereco], references: [id_endereco], onDelete: NoAction, onUpdate: NoAction, map: "cliente_fk")
   venda           venda[]
 }
@@ -51,21 +50,8 @@ model enderecos {
   rua         String?   @db.VarChar(100)
   numero      String?   @db.VarChar(20)
   cep         String?   @db.VarChar(10)
+  Filial      Filial[]
   cliente     cliente[]
-  filial      filial[]
-}
-
-model filial {
-  id_filial     Int        @id @default(autoincrement())
-  nome          String?    @db.VarChar(255)
-  id_endereco   Int?
-  email         String?    @db.VarChar
-  celular       String?    @db.VarChar
-  telefone_fixo String?    @db.VarChar
-  cnpj          String?    @db.VarChar
-  enderecos     enderecos? @relation(fields: [id_endereco], references: [id_endereco], onDelete: NoAction, onUpdate: NoAction, map: "fk_endereco_filial")
-  usuario       usuario[]
-  venda         venda[]
 }
 
 model item_venda {
@@ -111,16 +97,49 @@ model subcategoria_produto {
   produto           produto[]
 }
 
-model usuario {
-  matricula       Int
-  id_usuario      Int       @id(map: "usuario_pk") @default(autoincrement())
-  nome            String?   @db.VarChar(255)
-  nivel_de_acesso String?   @db.VarChar(50)
-  email           String?   @db.VarChar(255)
-  senha           String?   @db.VarChar(255)
+model Endereco {
+  Id_endereco Int    @id(map: "PK_Endereco") @default(autoincrement())
+  Pais        String @db.VarChar(100)
+  Estado      String
+  Cidade      String @db.VarChar(50)
+  Bairro      String @db.VarChar(25)
+  Rua         String @db.VarChar(25)
+  Numero      String @db.VarChar(25)
+  Cep         String @db.VarChar(25)
+}
+
+model Filial {
+  id_filial     Int        @id(map: "filial_pkey") @default(autoincrement())
+  nome          String?    @db.VarChar(255)
+  id_endereco   Int?
+  email         String?    @db.VarChar
+  celular       String?    @db.VarChar
+  telefone_fixo String?    @db.VarChar
+  cnpj          String?    @db.VarChar
+  enderecos     enderecos? @relation(fields: [id_endereco], references: [id_endereco], onDelete: NoAction, onUpdate: NoAction, map: "fk_endereco_filial")
+  Usuario       Usuario[]
+  venda         venda[]
+}
+
+model Usuario {
+  id_usuario      Int      @id(map: "PK_Usuario") @default(autoincrement())
+  nome            String   @db.VarChar(50)
+  matricula       String   @db.VarChar(60)
+  nivel_de_acesso String   @db.VarChar(60)
+  email           String   @db.VarChar(50)
+  celular         String   @db.VarChar(25)
+  data_nascimento DateTime @db.Timestamptz(6)
+  data_admiss_o   DateTime @map("data_admissão") @db.Timestamptz(6)
+  status          Boolean
   id_filial       Int?
-  celular         String?   @db.VarChar
-  data_nascimento DateTime? @db.Date
-  data_admiss_o   DateTime? @map("data_admissão") @db.Date
-  filial          filial?   @relation(fields: [id_filial], references: [id_filial], onDelete: NoAction, onUpdate: NoAction, map: "fk_filial_usuario")
+  senhaHash       String   @default("\\x")
+  senhaSalt       String   @default("\\x")
+  Filial          Filial?  @relation(fields: [id_filial], references: [id_filial], onDelete: Cascade, map: "fk_filial")
+}
+
+model EFMigrationsHistory {
+  MigrationId    String @id(map: "PK___EFMigrationsHistory") @db.VarChar(150)
+  ProductVersion String @db.VarChar(32)
+
+  @@map("__EFMigrationsHistory")
 }
