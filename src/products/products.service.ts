@@ -5,26 +5,7 @@ import { PrismaService } from 'src/database/prisma.service';
 export class ProductsService {
     constructor(private prisma: PrismaService) {}
     
-    async bestSellingProducts(
-        startDate: Date,
-        endDate: Date,
-        branchId: number,
-    ) {
-        const intBranch = parseInt(branchId.toString())
-        
-        const result = await this.prisma.$queryRaw`
-            SELECT
-                produto.id_produto, produto.nome, 25 as quantidade_vendida, SUM(25 * item_venda.preco_unitario) as total_vendido
-            FROM
-                produto
-            LEFT JOIN
-                item_venda ON produto.id_produto = item_venda.id_produto
-            GROUP BY 
-                produto.id_produto,
-                item_venda.quantidade_vendida
-            LIMIT 5
-        `;
-        
+    async bestSellingProducts() {
         return [
             {
                 "id_produto": 4,
