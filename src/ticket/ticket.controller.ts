@@ -17,8 +17,8 @@ export class TicketController {
   }
 
   @Get("salesByClients")
-  @ApiQuery({ name: 'idCliente', required: true, type: Number})
-  async salesByClients(@Query('idCliente') clientId: number) {
+  @ApiQuery({ name: 'clientId', required: true, type: Number})
+  async salesByClients(@Query('clientId') clientId: number) {
     try {
       const resultado = await this.ticketService.salesByClients(clientId);
       return resultado;
