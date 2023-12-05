@@ -16,12 +16,7 @@ export class ProductsController {
     @Query('branchId') branchId: number,
   ) {
     try {
-      const resultado = await this.productsService.bestSellingProducts(
-        new Date(startDate),
-        new Date(endDate),
-        branchId
-      );
-      
+      const resultado = await this.productsService.bestSellingProducts();
       return resultado;
     } catch(error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);

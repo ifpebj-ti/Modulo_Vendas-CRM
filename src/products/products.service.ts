@@ -5,11 +5,7 @@ import { PrismaService } from 'src/database/prisma.service';
 export class ProductsService {
     constructor(private prisma: PrismaService) {}
     
-    async bestSellingProducts(
-        startDate: Date,
-        endDate: Date,
-        branchId: number,
-    ) {
+    async bestSellingProducts() {
         return [
             {
                 "id_produto": 4,
