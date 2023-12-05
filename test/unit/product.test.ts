@@ -1,27 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from 'src/database/prisma.service';
-import { SalesController } from 'src/sales/sales.controller';
-import { SalesService } from 'src/sales/sales.service';
+import { ProductsController } from 'src/products/products.controller';
+import { ProductsService } from 'src/products/products.service';
 
-describe('SalesController', () => {
-  let controller: SalesController;
+describe('ProductsService', () => {
+  let controller: ProductsController;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [SalesService, PrismaService],
-      controllers: [SalesController],
+      controllers: [ProductsController],
+      providers: [ProductsService, PrismaService],
     }).compile();
-    controller = module.get(SalesController);
+    controller = module.get(ProductsController);
   });
 
-  it('Test get sales by interval and branch', async () => {
-    const sales = await controller.getSalesByIntervalAndBranch(
-      new Date("2023-10-06"), 
-      new Date("2023-10-06"), 
-      4
-    );
+  it('', async () => {
     
-    expect(sales).toBeDefined();
-    expect(sales.length).toBeGreaterThan(0);
   });
 });

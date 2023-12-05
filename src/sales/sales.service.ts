@@ -26,7 +26,7 @@ export class SalesService {
     startDate: Date,
     endDate: Date,
     branchId: number,
-  ) {
+  ): Promise<any> {
     const intBranch = parseInt(branchId.toString())
 
     const totalBilling = await this.prisma.$queryRaw`
@@ -43,7 +43,7 @@ export class SalesService {
     startDate: Date,
     endDate: Date,
     branchId: number,
-  ) {
+  ): Promise<any> {
     const intBranch = parseInt(branchId.toString())
 
     const totalSales = await this.prisma.venda.count({
