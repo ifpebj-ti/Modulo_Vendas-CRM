@@ -17,9 +17,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Lint
         run: |
           npm run lint
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         
   Test:
     runs-on: ubuntu-latest
@@ -33,7 +37,6 @@ jobs:
       - name: Run tests
         run: npm run test
         env:
-          CI: true
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 
@@ -50,3 +53,5 @@ jobs:
       - name: Build
         run: |
           npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
