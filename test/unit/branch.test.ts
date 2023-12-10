@@ -15,6 +15,10 @@ describe('SalesController', () => {
   });
 
   it('', async () => {
-    
+    const result = await controller.availableBranchs()
+    const branchs = result.branchs;
+
+    expect(branchs).toBeDefined();
+    expect(branchs.length).toBeGreaterThan(3);
   });
 });

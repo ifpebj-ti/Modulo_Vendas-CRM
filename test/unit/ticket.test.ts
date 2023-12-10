@@ -14,7 +14,23 @@ describe('TicketService', () => {
     controller = module.get(TicketController);
   });
 
-  it('', async () => {
-    
+  it('Test calculate ticket by interval and branch', async () => {
+    const result = await controller.ticketsByIntervalAndBranch(
+      new Date("2023-10-06"), 
+      new Date("2023-10-06"), 
+      4
+    )
+
+    expect(result).toBeDefined();
+    expect(result.length).toBeGreaterThan(0);
+  });
+
+  it('Test sales by client no exist', async () => {
+    const result = await controller.salesByClients(
+      14565488
+    )
+
+    expect(result).toBeDefined();
+    expect(result.length).toEqual(0);
   });
 });

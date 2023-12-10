@@ -14,7 +14,13 @@ describe('ProductsService', () => {
     controller = module.get(ProductsController);
   });
 
-  it('', async () => {
-    
+  it('Test products most selling', async () => {
+    const products = await controller.bestSellingProducts(
+      new Date("2023-10-06"), 
+      new Date("2023-10-06"), 
+      4
+    )
+
+    expect(products).toBeDefined();
   });
 });

@@ -5,7 +5,7 @@ import { SalesService } from 'src/sales/sales.service';
 
 describe('SalesService', () => {
   let controller: SalesController;
-
+  
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [SalesService, PrismaService],
