@@ -1,4 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { BranchController } from 'src/branch/branch.controller';
 import { BranchService } from 'src/branch/branch.service';
 import { PrismaService } from 'src/database/prisma.service';
