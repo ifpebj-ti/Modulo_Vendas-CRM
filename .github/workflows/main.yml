@@ -32,6 +32,8 @@ jobs:
 
   Test:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     name: Run tests
     needs: lint
     steps:
